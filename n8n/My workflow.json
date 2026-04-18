@@ -1,0 +1,80 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "process-email",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4ec64f8e-7f90-4950-8070-a18a53d705ef",
+      "name": "Webhook",
+      "webhookId": "bb109278-fc88-493b-8169-d0df1ae0fa5b"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Classify this email into one word only:\nUrgent\nRequest\nInfo\nSpam\n\nEmail:\n{{$json[\"body\"][\"email_text\"]}}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "3ffb1de0-7c2f-41b5-b829-8b6ada7cf0c9",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "0McgntfAsuQCKr9Q",
+          "name": "OpenAI account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "eb6ef503-ba30-4e1c-9c57-a5c67cb69bc3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1deb24a96388c614d7d470c1674b5369d4877cc934bab76f3a07a233fdb4ad4b"
+  },
+  "id": "2mGrsmSONmhEvFnL",
+  "tags": []
+}
